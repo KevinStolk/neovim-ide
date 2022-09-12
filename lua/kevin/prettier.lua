@@ -10,6 +10,7 @@ prettier.setup({
 	single_quote = true,
 	tab_width = 2,
 	filetypes = {
+		"html",
 		"css",
 		"javascript",
 		"javascriptreact",

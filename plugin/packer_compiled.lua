@@ -124,6 +124,11 @@ _G.packer_plugins = {
     path = "/home/kevin/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
     url = "https://github.com/lunarvim/darkplus.nvim"
   },
+  ["everblush.vim"] = {
+    loaded = true,
+    path = "/home/kevin/.local/share/nvim/site/pack/packer/start/everblush.vim",
+    url = "https://github.com/mangeshrex/everblush.vim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/kevin/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -208,6 +213,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kevin/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["onedarker.nvim"] = {
+    loaded = true,
+    path = "/home/kevin/.local/share/nvim/site/pack/packer/start/onedarker.nvim",
+    url = "https://github.com/lunarvim/onedarker.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,

@@ -1,43 +1,73 @@
-vim.opt.backup = false -- creates a backup file
-vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
-vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
-vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
-vim.opt.fileencoding = "utf-8" -- the encoding written to a file
-vim.opt.hlsearch = true -- highlight all matches on previous search pattern
-vim.opt.ignorecase = true -- ignore case in search patterns
-vim.opt.mouse = "a" -- allow the mouse to be used in neovim
-vim.opt.pumheight = 10 -- pop up menu height
-vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
-vim.opt.showtabline = 0 -- always show tabs
-vim.opt.smartcase = true -- smart case
-vim.opt.smartindent = true -- make indenting smarter again
-vim.opt.splitbelow = true -- force all horizontal splits to go below current window
-vim.opt.splitright = true -- force all vertical splits to go to the right of current window
-vim.opt.swapfile = false -- creates a swapfile
-vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
-vim.opt.timeoutlen = 1000 -- time to wait for a mapped sequence to complete (in milliseconds)
-vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 300 -- faster completion (4000ms default)
-vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 2 -- insert 2 spaces for a tab
--- vim.opt.cursorline = true                       -- highlight the current line
-vim.opt.number = true -- set numbered lines
-vim.opt.laststatus = 3
-vim.opt.showcmd = false
--- vim.opt.ruler = false
-vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
-vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
-vim.opt.wrap = false -- display lines as one long line
-vim.opt.scrolloff = 8 -- is one of my fav
-vim.opt.sidescrolloff = 8
-vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
-vim.opt.fillchars.eob = " "
-vim.opt.shortmess:append("c")
-vim.opt.whichwrap:append("<,>,[,],h,l")
-vim.opt.iskeyword:append("-")
-vim.notify = require("notify")
+local set = vim.opt
+vim.cmd("autocmd!")
+vim.scriptencoding = "utf-8"
+
+set.clipboard = "unnamedplus"
+set.encoding = "utf-8"
+set.fileencoding = "utf-8"
+set.title = true
+set.number = true
+set.relativenumber = true
+set.autoindent = true
+set.smartindent = true
+set.hlsearch = true
+set.backup = false
+set.showcmd = true
+set.cmdheight = 1
+set.laststatus = 2
+set.expandtab = true
+set.scrolloff = 10
+set.shell = "zsh"
+set.backupskip = { "/tmp/*", "/private/tmp/*" }
+set.inccommand = "split"
+set.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+set.smarttab = true
+set.breakindent = true
+set.shiftwidth = 4
+set.tabstop = 4
+set.wrap = false -- No Wrap lines
+set.backspace = { "start", "eol", "indent" }
+set.path:append({ "**" }) -- Finding files - Search down into subfolders
+set.wildignore:append({ "*/node_modules/*" })
+set.backup = false
+set.completeopt = { "menuone", "noselect" }
+set.conceallevel = 0
+set.fileencoding = "utf-8"
+set.showmode = false
+set.showtabline = 0
+set.smartcase = true
+set.smartindent = true
+set.splitbelow = true
+set.splitright = true
+set.swapfile = false
+set.timeoutlen = 1000
+set.undofile = true
+set.updatetime = 50
+set.writebackup = false
+set.expandtab = true
+set.autoindent = true
+set.laststatus = 3
+set.showcmd = false
+set.numberwidth = 4
+set.signcolumn = "yes"
+set.scrolloff = 8
+set.sidescrolloff = 8
+set.colorcolumn = "80"
+set.fillchars.eob = ""
+set.shortmess:append("c")
+set.formatoptions:append({ "r" })
+
+-- Undercurl
+vim.cmd([[let &t_Cs = "\e[4:3m"]])
+vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+-- Turn off paste mode when leaving insert
+vim.api.nvim_create_autocmd("InsertLeave", {
+	pattern = "*",
+	command = "set nopaste",
+})
+
+-- Add asterisks in block comments
+set.formatoptions:append({ "r" })
 
 vim.g.vimwiki_list = { { path = "~/vimwiki", syntax = "markdown", ext = ".md" } } -- Vimwiki markdown syntax

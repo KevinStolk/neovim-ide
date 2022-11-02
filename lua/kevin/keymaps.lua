@@ -1,7 +1,6 @@
--- Shorten function name
 local keymap = vim.keymap.set
--- Silent keymap option
-local opts = { noremap = true, silent = true }
+
+local opts = { silent = true }
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -16,42 +15,66 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("i", "<C-c>", "<ESC>")
+keymap("n", "Q", "<Nop>")
+keymap("n", "q", "<Nop>")
 
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+-- Do not yank with x
+keymap("n", "x", '"_x')
+
+-- Increment/decrement
+keymap("n", "+", "<C-a>")
+keymap("n", "-", "<C-x>")
+
+-- Select all
+keymap("n", "<C-a>", "gg<S-v>G")
+
+-- New tab and close tab
+keymap("n", "te", ":tabedit")
+keymap("n", "tc", ":tabclose")
+
+-- Quit
+keymap("n", "sq", ":q<CR>")
+
+-- Split window
+-- keymap("n", "ss", ":split<Return><C-w>w")
+-- keymap("n", "sv", ":vsplit<Return><C-w>w")
+
+keymap("n", "ss", ":split<Return>")
+keymap("n", "sv", ":vsplit<Return>")
+
+-- Move between windows
+-- keymap("n", "<Space>", "<C-w>w")
+keymap("", "sh", "<C-w>h")
+keymap("", "sk", "<C-w>k")
+keymap("", "sj", "<C-w>j")
+keymap("", "sl", "<C-w>l")
+
+-- Resize window
+keymap("n", "<C-w><left>", "<C-w><")
+keymap("n", "<C-w><right>", "<C-w>>")
+keymap("n", "<C-w><up>", "<C-w>+")
+keymap("n", "<C-w><down>", "<C-w>-")
+
+-- Prettier format
+keymap("n", "<leader>f", ":Prettier<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
--- Move text up and down and paste
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-
--- Prettier format
-keymap("n", "<S-f>", ":Prettier<CR>", opts)
-
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
+-- Prettier format
+keymap("n", "<leader>f", ":Prettier<CR>", opts)
+
 -- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
+-- keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<S-q>", "<cmd>:tabclose<CR>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
-
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -59,6 +82,9 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Plugins --
+keymap("n", "<leader>re", "<Plug>RestNvim")
+keymap("n", "<leader>rep", "<Plug>RestNvimPreview")
+keymap("n", "<leader>rel", "<Plug>RestNvimLast")
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
@@ -73,8 +99,8 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+keymap("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", opts)
+keymap("x", "<leader>/", "<Plug>(comment_toggle_linewise_visual)")
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)

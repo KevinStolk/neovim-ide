@@ -1,17 +1,22 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
+local status, ts = pcall(require, "nvim-treesitter.configs")
+if not status then
 	return
 end
 
-configs.setup({
-	ensure_installed = "all", -- one of "all" or a list of languages
-	ignore_install = { "" }, -- List of parsers to ignore installing
+ts.setup({
 	highlight = {
-		enable = true, -- false will disable the whole extension
-		disable = { "css" }, -- list of language that will be disabled
+		enable = true,
+		disable = {},
 	},
+	indent = { enable = true, disable = { "python", "css" } },
+	ensure_installed = "all",
 	autopairs = {
 		enable = true,
 	},
-	indent = { enable = true, disable = { "python", "css" } },
+	autotag = {
+		enable = true,
+	},
 })
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx", "javascript.jsx" }

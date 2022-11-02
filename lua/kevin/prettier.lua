@@ -4,18 +4,17 @@ if not status then
 end
 
 prettier.setup({
-	bin = "prettierd",
-	jsx_bracket_same_line = true,
+	tab_width = 4,
 	jsx_single_quote = true,
 	single_quote = true,
-	tab_width = 2,
+	bin = "prettierd",
 	filetypes = {
-		"html",
 		"css",
 		"javascript",
 		"javascriptreact",
 		"typescript",
 		"typescriptreact",
+		"http",
 		"json",
 		"scss",
 		"less",
